@@ -25,89 +25,89 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.patricio.contreras.GastosBackend.models.entity.Nota;
-import com.patricio.contreras.GastosBackend.models.services.INotaService;
+import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
+import com.patricio.contreras.GastosBackend.models.services.ITipoGastoService;
 
 @RestController
 @CrossOrigin(origins = { "http://localhost:4200" })
 @RequestMapping("/api")
-public class NotaRestController {
+public class TipoGastoRestController {
 
 	@Autowired
-	private INotaService notaService;
+	private ITipoGastoService tipoGastoService;
 	
-	@GetMapping("/notas")
-	public List<Nota> index(){
-		return notaService.findAll();
+	@GetMapping("/tipogastos")
+	public List<TipoGasto> index(){
+		return tipoGastoService.findAll();
 	}
 	
-	@GetMapping("/notas/page/{page}")
-	public Page<Nota> index(@PathVariable Integer page){
+	@GetMapping("/tipogastos/page/{page}")
+	public Page<TipoGasto> index(@PathVariable Integer page){
 		Pageable pageable = PageRequest.of(page, 4);
-		return notaService.findAll(pageable);
+		return tipoGastoService.findAll(pageable);
 	}
 	
-	@GetMapping("/notas/{id}")
+	@GetMapping("/tipogastos/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id){
-		
-		Nota nota = null;
+		TipoGasto tipoGasto = null;
 		Map<String, Object> response  = new HashMap<>();
+		
 		try {
-			nota = notaService.findById(id);
+			tipoGasto = tipoGastoService.findById(id);
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar la consulta en la base de datos!");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		if(nota == null) {
-			response.put("mensaje", "La nota con ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+		if(tipoGasto == null) {
+			response.put("mensaje", "El tipo de gasto con ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<Nota>(nota,HttpStatus.OK);
+		
+		return new ResponseEntity<TipoGasto>(tipoGasto,HttpStatus.OK);
 	}
 	
-	@PostMapping("/notas")
-	public ResponseEntity<?> create(@Valid @RequestBody Nota nota,BindingResult result){
-		// es la nota creada
-		Nota notaNew = null;
+	@PostMapping("/tipogastos")
+	public ResponseEntity<?> create(@Valid @RequestBody TipoGasto tipoGasto,BindingResult result){
 		
+		TipoGasto tipoGastoNew = null;
 		Map<String, Object> response = new HashMap<>();
 		// se valida si contiene errores el objeto 
-				if(result.hasErrors()) {
-					// se debe obtener los mensajes de errror de cada campo 
-					// y convertir estos en una lista de errores de tipo string
-					// se debe convertir esta lista de fielderrors en String
-					List<String> errors = result.getFieldErrors()
-							.stream()
-							.map(err -> "El campo '"+ err.getField() + "' "+err.getDefaultMessage())//muy parecido  al operador map en angular (rxjs), mismo concepto!
-							.collect(Collectors.toList());// ahora podemos convertir de regreso el stream  aun tipo List
-					response.put("errors", errors);
-					// se responde con un responseentity con listados de error
-					return new ResponseEntity<Map<String, Object>>(response,HttpStatus.BAD_REQUEST);
-					// en lo anterior se recibe un field errors y lo convertimos a string
-				}
+		if(result.hasErrors()) {
+			// se debe obtener los mensajes de errror de cada campo 
+			// y convertir estos en una lista de errores de tipo string
+			// se debe convertir esta lista de fielderrors en String
+			List<String> errors = result.getFieldErrors()
+					.stream()
+					.map(err -> "El campo '"+ err.getField() + "' "+err.getDefaultMessage())//muy parecido  al operador map en angular (rxjs), mismo concepto!
+					.collect(Collectors.toList());// ahora podemos convertir de regreso el stream  aun tipo List
+			response.put("errors", errors);
+			// se responde con un responseentity con listados de error
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.BAD_REQUEST);
+			// en lo anterior se recibe un field errors y lo convertimos a string
+		}
+		
 		try {
-			notaNew = notaService.save(nota);
+			tipoGastoNew = tipoGastoService.save(tipoGasto); 
 		}catch(DataAccessException e) {
 			response.put("mensaje", "Error al realizar el insert en la base de datos!");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		//se podria pasar un map con un mensaje y con el gasto creado
-		response.put("mensaje", "La nota ha sido creada con éxito! ");
-		response.put("nota",notaNew);
-		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
+		//se podria pasar un map con un mensaje y con el tipo gasto creado
+				response.put("mensaje", "El tipo de gasto ha sido creado con éxito! ");
+				response.put("Tipo Gasto",tipoGastoNew);
+				return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/notas/{id}")
-	public ResponseEntity<?> update(@Valid @RequestBody Nota nota,BindingResult result,@PathVariable Long id){
-		//obtenemos la nota que queremos modificar de la bd por Id
-		Nota notaActual = notaService.findById(id);
+	@PutMapping("/tipogastos/{id}")
+	public ResponseEntity<?> update(@Valid @RequestBody TipoGasto tipoGasto,BindingResult result, @PathVariable Long id){
 		
-		//Nota ya actualizada
-		Nota notaUpdated = null;
+		TipoGasto tipoGastoActual = tipoGastoService.findById(id);
+		
+		TipoGasto tipoGastoUpdated = null;
 		
 		Map<String, Object> response = new HashMap<>();
 		
@@ -127,44 +127,43 @@ public class NotaRestController {
 			// en lo anterior se recibe un field errors y lo convertimos a string
 		}
 		
-		if(notaActual == null) {
-			response.put("mensaje", "Error: no se pudo editar, la nota con ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+		if(tipoGastoActual == null) {
+			response.put("mensaje", "Error: no se pudo editar, el tipo de gasto con ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.NOT_FOUND);
 		}
 		
 		try {
-			//modificamos los datos de la nota actual con los datos del gasto que te envien
-			notaActual.setTitulo(nota.getTitulo());
-			notaActual.setDescripcion(nota.getDescripcion());
+			tipoGastoActual.setTipo(tipoGasto.getTipo());
 			
-			notaUpdated = notaService.save(notaActual);
+			tipoGastoUpdated = tipoGastoService.save(tipoGastoActual);
 			
 		}catch(DataAccessException e) {
-			response.put("mensaje", "Error al actualizar la nota en la base de datos!");
+			response.put("mensaje", "Error al actualizar el tipo de gasto en la base de datos!");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "La nota ha sido actualizada con éxito!");
-		response.put("nota",notaUpdated);
+		response.put("mensaje", "El tipo de gasto ha sido actualizado con éxito!");
+		response.put("tipo gasto", tipoGastoUpdated);
 		
 		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED) ;
 	}
 	
-	@DeleteMapping("notas/{id}")
+	@DeleteMapping("/tipogastos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		//Map para guardar el contenido que enviaremos en el ResponseEntity con mensajes
 		Map<String, Object> response = new HashMap<>();
 		
 		try {
-			notaService.delete(id);
+			tipoGastoService.delete(id);
 		}catch (DataAccessException e) {
-			response.put("mensaje", "Error al eliminar la nota de la base de datos!");
+			response.put("mensaje", "Error al eliminar el tipo de gasto de la base de datos!");
 			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
 			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 		
-		response.put("mensaje", "La nota fue eliminada con éxito!");
+		response.put("mensaje", "El tipo de gasto fue eliminado con éxito!");
+		
 		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.OK);
 	}
 }

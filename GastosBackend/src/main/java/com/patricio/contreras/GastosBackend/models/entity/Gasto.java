@@ -47,7 +47,7 @@ public class Gasto implements Serializable {
 	@Column(nullable = false)
 	private int cantidad;
 	
-	@NotEmpty 
+	
 	@Column(nullable = false)
 	private int valor;
 	
@@ -56,7 +56,7 @@ public class Gasto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
-	@NotNull(message = "El tipo no puede estar vacio")
+	@NotNull(message = "no puede estar vacio")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "tipo_id")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
