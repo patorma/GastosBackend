@@ -144,7 +144,7 @@ public class GastoRestController {
 			gastoActual.setNombre(gasto.getNombre());
 			gastoActual.setDescripcion(gasto.getDescripcion());
 			gastoActual.setFecha(gasto.getFecha());
-			gastoActual.setCantidad(gasto.getCantidad());
+			gastoActual.setLocal(gasto.getLocal());
 			gastoActual.setValor(gasto.getValor());
 			gastoActual.setTipo(gasto.getTipo());
 			

@@ -133,7 +133,7 @@ public class TipoGastoRestController {
 		}
 		
 		try {
-			tipoGastoActual.setTipo(tipoGasto.getTipo());
+			tipoGastoActual.setNombre(tipoGasto.getNombre());
 			
 			tipoGastoUpdated = tipoGastoService.save(tipoGastoActual);
 			

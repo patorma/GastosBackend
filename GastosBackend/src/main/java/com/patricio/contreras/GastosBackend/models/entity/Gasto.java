@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -44,8 +43,12 @@ public class Gasto implements Serializable {
 	@Size(min=30, max=400)
 	private String descripcion;
 	
+	/*@Column(nullable = false)
+	private int cantidad;*/
+	
 	@Column(nullable = false)
-	private int cantidad;
+	@Size(min=8,max=100)
+	private String local;
 	
 	
 	@Column(nullable = false)
