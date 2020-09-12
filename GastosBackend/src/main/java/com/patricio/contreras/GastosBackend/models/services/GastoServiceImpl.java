@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.patricio.contreras.GastosBackend.models.dao.IGastoDao;
+import com.patricio.contreras.GastosBackend.models.entity.Ciudad;
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
 import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
 
@@ -59,6 +60,13 @@ public class GastoServiceImpl implements IGastoService {
 	public List<TipoGasto> findAllTipos() {
 
 		return gastoDao.findAllTipos();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Ciudad> findAllCiudades() {
+		
+		return gastoDao.findAllCiudades();
 	}
 
 }

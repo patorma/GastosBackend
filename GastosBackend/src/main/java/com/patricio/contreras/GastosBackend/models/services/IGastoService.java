@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.patricio.contreras.GastosBackend.models.entity.Ciudad;
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
 import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
 
@@ -23,6 +24,8 @@ public interface IGastoService {
    public void delete(Long id);
    
    public List<TipoGasto> findAllTipos();
+   
+   public List<Ciudad> findAllCiudades();
    
    
 

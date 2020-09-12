@@ -65,6 +65,12 @@ public class Gasto implements Serializable {
 	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
 	private TipoGasto tipo;
 	
+	@NotNull(message = "no puede estar vacio")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ciudad_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
+	private Ciudad ciudad; 
+	
 	/**
 	 * 
 	 */
