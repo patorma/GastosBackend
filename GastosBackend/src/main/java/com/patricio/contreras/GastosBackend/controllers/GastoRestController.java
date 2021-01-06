@@ -26,9 +26,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 
-import com.patricio.contreras.GastosBackend.models.entity.Ciudad;
+
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
+
 import com.patricio.contreras.GastosBackend.models.services.IGastoService;
 
 @RestController
@@ -143,12 +143,12 @@ public class GastoRestController {
 		try {
 			//modificamos los datos del gasto actual con los datos del gasto que te envien
 			gastoActual.setNombre(gasto.getNombre());
-			gastoActual.setDescripcion(gasto.getDescripcion());
+			//gastoActual.setDescripcion(gasto.getDescripcion());
 			gastoActual.setFecha(gasto.getFecha());
-			gastoActual.setLocal(gasto.getLocal());
+			//gastoActual.setLocal(gasto.getLocal());
 			gastoActual.setValor(gasto.getValor());
-			gastoActual.setTipo(gasto.getTipo());
-			gastoActual.setCiudad(gasto.getCiudad());
+			//gastoActual.setTipo(gasto.getTipo());
+			//gastoActual.setCiudad(gasto.getCiudad());
 			
 			gastoUpdated = gastoService.save(gastoActual);
 			
@@ -182,7 +182,7 @@ public class GastoRestController {
 			
 	}
 	
-	@GetMapping("/gastos/tipos")
+	/*@GetMapping("/gastos/tipos")
 	public List<TipoGasto> listarTipos(){
 		return gastoService.findAllTipos();
 	}
@@ -190,6 +190,6 @@ public class GastoRestController {
 	@GetMapping("/gastos/ciudades")
 	public List<Ciudad> listarCiudades(){
 		return gastoService.findAllCiudades();
-	}
+	}*/
 
 }

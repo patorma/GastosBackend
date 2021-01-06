@@ -38,7 +38,7 @@ public class TipoGasto implements Serializable  {
 	@OneToMany(mappedBy = "tipo",cascade = CascadeType.ALL)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
 	@JsonIgnore
-	private List<Gasto> gastos;
+	private List<DetalleGasto> detalle;
 	
 	
 	private static final long serialVersionUID = 1L;

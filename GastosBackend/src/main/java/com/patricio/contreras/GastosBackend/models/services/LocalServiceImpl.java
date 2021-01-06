@@ -8,53 +8,50 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.patricio.contreras.GastosBackend.models.dao.IGastoDao;
-
-import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-
+import com.patricio.contreras.GastosBackend.models.dao.ILocalDao;
+import com.patricio.contreras.GastosBackend.models.entity.Local;
 
 @Service
-public class GastoServiceImpl implements IGastoService {
-
+public class LocalServiceImpl implements ILocalService  {
+	
+	
 	@Autowired
-	private IGastoDao gastoDao;
+	private ILocalDao localDao;
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Gasto> findAll() {
-
-		return gastoDao.findAll();
+	public List<Local> findAll() {
+		
+		return localDao.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Gasto> findAll(Pageable pageable) {
-
-		return gastoDao.findAll(pageable);
+	public Page<Local> findAll(Pageable pageable) {
+		
+		return localDao.findAll(pageable);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Gasto findById(Long id) {
-
-		return gastoDao.findById(id).orElse(null);
+	public Local findById(Long id) {
+		
+		return localDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
-	public Gasto save(Gasto gasto) {
-
-		return gastoDao.save(gasto);
+	public Local save(Local local) {
+		
+		return localDao.save(local);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-
-		gastoDao.deleteById(id);
-
+		
+		localDao.deleteById(id);
+		
 	}
-
-
 
 }
