@@ -26,9 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.patricio.contreras.GastosBackend.models.entity.DetalleGasto;
-import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-import com.patricio.contreras.GastosBackend.models.entity.Local;
-import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
+
 import com.patricio.contreras.GastosBackend.models.services.IDetalleGastoService;
 
 @RestController
@@ -147,8 +145,8 @@ public class DetalleGastoController {
 			//modificamos los datos del detalle del gasto actual con los datos que te envien
 			detalleGastoActual.setDescripcion(detalleGasto.getDescripcion());
 			detalleGastoActual.setCantidad(detalleGasto.getCantidad());
-			detalleGastoActual.setTipo(detalleGasto.getTipo());
-			detalleGastoActual.setLocales(detalleGasto.getLocales());
+			detalleGastoActual.setNombreLocal(detalleGasto.getNombreLocal());
+			detalleGastoActual.setCiudad(detalleGasto.getCiudad());
 			detalleGastoActual.setGasto(detalleGasto.getGasto());
 			
 			detalleGastoupdated = detalleGastoService.save(detalleGastoActual);
@@ -183,18 +181,7 @@ public class DetalleGastoController {
 		
 	}
 	
-	@GetMapping("/detalle/tipos")
-	public List<TipoGasto> listarTipos(){
-		return detalleGastoService.findAllTipos();
-	}
+
+
 	
-	@GetMapping("/detalle/gastos")
-	public List<Gasto> listarGasto(){
-		return detalleGastoService.findAllGastos();
-	
-	}
-	@GetMapping("/detalle/locales")
-	public List<Local> listarLocales(){
-		return detalleGastoService.findAllLocales();
-	}
 }

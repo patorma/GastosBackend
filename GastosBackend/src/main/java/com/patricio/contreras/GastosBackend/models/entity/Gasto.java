@@ -55,6 +55,9 @@ public class Gasto implements Serializable {
 	@Column(nullable = false)
 	private int valor;
 	
+	@Column(nullable = false)
+	private Tipos tipo;
+	
 	@Column(name = "fecha_gasto")
 	@NotNull(message = "no puede estar vacio")
 	@Temporal(TemporalType.DATE)

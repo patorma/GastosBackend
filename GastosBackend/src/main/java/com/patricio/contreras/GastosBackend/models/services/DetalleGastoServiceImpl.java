@@ -10,9 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.patricio.contreras.GastosBackend.models.dao.IDetalleGastoDao;
 import com.patricio.contreras.GastosBackend.models.entity.DetalleGasto;
-import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-import com.patricio.contreras.GastosBackend.models.entity.Local;
-import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
+
+
 
 @Service
 public class DetalleGastoServiceImpl implements IDetalleGastoService{
@@ -55,24 +54,7 @@ public class DetalleGastoServiceImpl implements IDetalleGastoService{
 		detalleGastoDao.deleteById(id);
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<TipoGasto> findAllTipos() {
-		
-		return detalleGastoDao.findAllTipos();
-	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public List<Local> findAllLocales() {
 	
-		return detalleGastoDao.findAllLocales();
-	}
-
-	@Override
-	public List<Gasto> findAllGastos() {
-		
-		return detalleGastoDao.findAllGastos();
-	}
 
 }

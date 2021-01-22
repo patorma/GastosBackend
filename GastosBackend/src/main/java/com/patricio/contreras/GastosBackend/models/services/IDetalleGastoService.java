@@ -5,9 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.patricio.contreras.GastosBackend.models.entity.DetalleGasto;
-import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-import com.patricio.contreras.GastosBackend.models.entity.Local;
-import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
 
 
 public interface IDetalleGastoService {
@@ -23,11 +20,7 @@ public interface IDetalleGastoService {
 	
 	public void delete(Long id);
 	
-	public List<TipoGasto> findAllTipos();
-	
-	public List<Local> findAllLocales();
-	
-	public List<Gasto> findAllGastos();
+	//public List<Gasto> findAllGastos();
 	
 	
 
