@@ -136,6 +136,7 @@ public class NotaRestController {
 			//modificamos los datos de la nota actual con los datos del gasto que te envien
 			notaActual.setTitulo(nota.getTitulo());
 			notaActual.setDescripcion(nota.getDescripcion());
+			notaActual.setEstado(nota.getEstado());
 			
 			notaUpdated = notaService.save(notaActual);
 			

@@ -142,13 +142,17 @@ public class GastoRestController {
 		
 		try {
 			//modificamos los datos del gasto actual con los datos del gasto que te envien
-			gastoActual.setNombre(gasto.getNombre());
-			//gastoActual.setDescripcion(gasto.getDescripcion());
-			gastoActual.setFecha(gasto.getFecha());
-			//gastoActual.setLocal(gasto.getLocal());
+			gastoActual.setNombre(gasto.getNombre());	
 			gastoActual.setValor(gasto.getValor());
-			//gastoActual.setTipo(gasto.getTipo());
-			//gastoActual.setCiudad(gasto.getCiudad());
+			gastoActual.setTipo(gasto.getTipo());
+			gastoActual.setDescripcion(gasto.getDescripcion());
+			gastoActual.setCantidad(gasto.getCantidad());
+			gastoActual.setNombreLocal(gasto.getNombreLocal());
+			gastoActual.setCiudad(gasto.getCiudad());
+			gastoActual.setFecha(gasto.getFecha());
+			
+		
+			
 			
 			gastoUpdated = gastoService.save(gastoActual);
 			

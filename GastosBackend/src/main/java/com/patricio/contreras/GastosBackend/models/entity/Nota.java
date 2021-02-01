@@ -5,12 +5,17 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,6 +41,10 @@ public class Nota implements Serializable{
 	@Column(nullable = false)
 	@Size(min=30, max=400)
 	private String descripcion;
+	
+	@Enumerated(value = EnumType.STRING)
+	@Column(nullable = true)
+	private Estados estado;
 	
 	@Column(name = "fecha_creacion")
 	private LocalDate fechaCreacion;
