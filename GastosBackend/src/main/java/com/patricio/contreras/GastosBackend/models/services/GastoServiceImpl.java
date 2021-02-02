@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.patricio.contreras.GastosBackend.models.dao.IGastoDao;
 
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
+import com.patricio.contreras.GastosBackend.models.entity.Tipos;
 
 
 @Service
@@ -54,6 +55,8 @@ public class GastoServiceImpl implements IGastoService {
 		gastoDao.deleteById(id);
 
 	}
+
+	
 
 
 

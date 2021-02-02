@@ -10,6 +10,7 @@ import com.patricio.contreras.GastosBackend.models.entity.Gasto;
 
 
 
+
 public interface IGastoService {
 	
    public List<Gasto> findAll();	
@@ -23,9 +24,9 @@ public interface IGastoService {
    
    public void delete(Long id);
    
-   /*public List<TipoGasto> findAllTipos();
+   /* public List<Tipos> findAllTipos();*/
    
-   public List<Ciudad> findAllCiudades();*/
+  /* public List<Ciudad> findAllCiudades();*/
    
    
 

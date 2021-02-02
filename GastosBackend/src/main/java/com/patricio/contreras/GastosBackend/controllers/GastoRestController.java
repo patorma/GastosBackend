@@ -28,7 +28,7 @@ import org.springframework.validation.BindingResult;
 
 
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-
+import com.patricio.contreras.GastosBackend.models.entity.Tipos;
 import com.patricio.contreras.GastosBackend.models.services.IGastoService;
 
 @RestController
@@ -187,13 +187,10 @@ public class GastoRestController {
 	}
 	
 	/*@GetMapping("/gastos/tipos")
-	public List<TipoGasto> listarTipos(){
+	public List<Tipos> listarTipos(){
 		return gastoService.findAllTipos();
-	}
-	
-	@GetMapping("/gastos/ciudades")
-	public List<Ciudad> listarCiudades(){
-		return gastoService.findAllCiudades();
 	}*/
+	
+	
 
 }
