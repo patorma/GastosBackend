@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -37,11 +38,13 @@ public class Gasto implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	
 	@Size(min=3, max=50)
+	@NotEmpty 
+	@Column(nullable = false,unique=true) 
 	private String nombre;
 	
-	@Column(nullable = false)
+	@Column(nullable = false)  
 	private int valor;
 	
 	@Column(nullable = false)
@@ -49,19 +52,21 @@ public class Gasto implements Serializable {
 	private Tipos tipo;
 	
 	@Column(nullable = false)
+	@NotEmpty  
 	@Size(min=30, max=400)
 	private String descripcion;
 	
-	@Column(nullable = false)
-	private int cantidad;
+	/*@Column(nullable = false)
+	@NotNull(message = "no puede estar vacio")
+	private int cantidad;*/
 	
-	@Column(name = "nombre_local")
+	/*@Column(name = "nombre_local")
 	@Size(min=6, max=60)
 	private String nombreLocal;
 	
 	@Column(nullable = false)
 	@Size(min=4, max=45)
-	private String ciudad;
+	private String ciudad;*/
 	
 	@Column(name = "fecha_gasto")
 	@NotNull(message = "no puede estar vacio")
