@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -34,16 +35,18 @@ public class Nota implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,unique=true)
 	@Size(min=10, max=50)
+	@NotEmpty 
 	private String titulo;
 	
 	@Column(nullable = false)
 	@Size(min=30, max=400)
+	@NotEmpty 
 	private String descripcion;
 	
+	@Column(nullable = false)
 	@Enumerated(value = EnumType.STRING)
-	@Column(nullable = true)
 	private Estados estado;
 	
 	@Column(name = "fecha_creacion")
