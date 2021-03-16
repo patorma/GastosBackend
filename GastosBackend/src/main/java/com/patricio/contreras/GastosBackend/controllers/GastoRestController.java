@@ -187,6 +187,15 @@ public class GastoRestController {
 	public List<Tipos> listarTipos(){
 		return gastoService.findAllTipos();
 	}*/
+	@GetMapping("/gastos/valor")
+	public int valorTotal() {
+		return gastoService.valor2();
+	}
+	
+	@GetMapping("/gastos/cantidad")
+	public int CantidadGasto() {
+		return gastoService.cantidad();
+	}
 	
 	
 

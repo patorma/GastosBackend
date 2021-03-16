@@ -24,6 +24,10 @@ public interface IGastoService {
    
    public void delete(Long id);
    
+   public int valor2();
+   
+   public int cantidad();
+   
    /* public List<Tipos> findAllTipos();*/
    
   /* public List<Ciudad> findAllCiudades();*/

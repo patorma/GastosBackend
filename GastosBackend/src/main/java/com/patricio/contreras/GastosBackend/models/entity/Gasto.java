@@ -48,7 +48,6 @@ public class Gasto implements Serializable {
 	private int valor;
 	
 	@Column(nullable = false)
-	@NotEmpty 
 	@Enumerated(value = EnumType.STRING)
 	private Tipos tipo;
 	

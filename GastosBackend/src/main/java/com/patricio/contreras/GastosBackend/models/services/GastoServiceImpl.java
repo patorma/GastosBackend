@@ -56,6 +56,20 @@ public class GastoServiceImpl implements IGastoService {
 
 	}
 
+	@Override
+	@Transactional
+	public int valor2() {
+		
+		return gastoDao.valor2();
+	}
+
+	@Override
+	@Transactional
+	public int cantidad() {
+		
+		return gastoDao.cantidad();
+	}
+
 	
 
 
