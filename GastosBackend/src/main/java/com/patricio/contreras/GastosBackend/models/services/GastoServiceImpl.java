@@ -70,6 +70,13 @@ public class GastoServiceImpl implements IGastoService {
 		return gastoDao.cantidad();
 	}
 
+	@Override
+	@Transactional
+	public int showTotalGastoByFecha(int mes, int año) {
+		
+		return gastoDao.showTotalGastoByFecha(mes, año);
+	}
+
 	
 
 

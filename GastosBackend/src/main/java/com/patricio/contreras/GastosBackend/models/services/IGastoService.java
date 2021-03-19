@@ -28,6 +28,8 @@ public interface IGastoService {
    
    public int cantidad();
    
+   public int showTotalGastoByFecha(int mes,int año);
+   
    /* public List<Tipos> findAllTipos();*/
    
   /* public List<Ciudad> findAllCiudades();*/

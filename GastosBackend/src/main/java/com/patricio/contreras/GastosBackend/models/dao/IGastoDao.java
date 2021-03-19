@@ -2,6 +2,8 @@ package com.patricio.contreras.GastosBackend.models.dao;
 
 
 
+import java.util.Date;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -19,5 +21,8 @@ public interface IGastoDao extends JpaRepository<Gasto, Long>{
 	
 	@Query(value="SELECT COUNT(nombre) FROM Gastos",nativeQuery = true)
 	public int cantidad();
+	
+	@Query(value="SELECT SUM(g.valor) FROM Gastos g WHERE MONTH(g.fecha_gasto) = ?1 AND YEAR(g.fecha_gasto) = ?2",nativeQuery = true)
+	public int showTotalGastoByFecha(int mes,int año);
 
 }

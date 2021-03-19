@@ -198,5 +198,23 @@ public class GastoRestController {
 	}
 	
 	
+	@GetMapping("/gastos/filtrarValor/{a}/{b}")
+	public ResponseEntity<?> valorByFecha(@PathVariable int a , @PathVariable int b) {
+		int g = 0;
+		Map<String, Object> response  = new HashMap<>();
+		if(a == 0 || b == 0 ) {
+			response.put("mensaje", "Error no existe mes 0  o año 0!");
+			return new ResponseEntity<Map<String, Object>>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		
+		
+	    g = gastoService.showTotalGastoByFecha(a, b);
+	    
+	     return new ResponseEntity<Integer>(g,HttpStatus.OK);
+			
+	}
+	
+	
 
 }
