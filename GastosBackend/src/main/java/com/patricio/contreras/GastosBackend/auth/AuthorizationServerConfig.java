@@ -11,8 +11,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.token.AccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -24,7 +22,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	// passwordEncoder()
 	
 	@Autowired
-	private BCryptPasswordEncoder  passwordEncoder;
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	// Se debe inyectar el AuthenticationManager
 	// AutorizationServer lo use en el login
@@ -35,19 +33,46 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	
 	// Se implementaran tres metodos de configuracion
 
+	//Acá se implmenta los permisos de nuestros endpoints  de nuestras rutas de acceso de Spring security
+	//OAuth 2.0
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
 
-		super.configure(security);
+		// se le da acceso total tanto a usuario como usuario anonimo en el login para autenticarse
+		// Endpoint de login: /oauth/token/
+		//el primero es para generar el token cuando se autentica
+		//el segundo es para chequear o validar el token
+		// se da el permiso al endpoint que se encarga de validar el token cada vez que queramos acceder a
+		// una pagina protegida  tenemos que enviar nuestro token nuestro jwt en la cabecera de nuestra peticion 
+		//dentro del authorization
+		//endpoint que verific ael token y su firma:/oauth/check_token(.checkTokenAccess(""))
+		//estos dos endpoints estan protegidos por autenticacion http Basic
+		//(Header Authorization Basic: Client Id + Client secret)
+		 // y utilizando las credenciales del cliente de la aplicacion envia el cliente Id con su secreto
+		security.tokenKeyAccess("permitAll()")
+		.checkTokenAccess("isAuthenticated()");
 	}
 
+	//2) Hay que configurar nuestros clientes nuestras aplicaciones que van a acceder a nuestro api rest
+	// en nuestra aplicacion vamos a tener un solo cliente que seria nuestro frontend osea nuestra aplicacion
+	// con Angular en este caso se va a registrar nuestra aplicacion de angular con sus credenciales, tiene
+	//doble seguridad por el cliente que se autentifica con el login y por el backend 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-	
-		super.configure(clients);
+	   // configuramos tipo de almacenamiento,luego id del cliente corresponde al username de usuario
+		// aca se valida el cliente y backend entrega el token  
+		//En resumen: a traves de un refreshToken es un GrantTypes o tipo de concesion
+		// podemos obtener un token de acceso completamenrte renovado sin tener que iniciar sesion
+		//y se configura ambos tiempos de validez del token lo ue vaa durar el token
+		clients.inMemory().withClient("angularapp")
+		.secret(passwordEncoder.encode("12345"))
+		.scopes("read","write")// ahora se ve el scope o los permisos del clienete
+		.authorizedGrantTypes("password","refresh_token")// se refresca el token 
+		.accessTokenValiditySeconds(3600)// se indica el tiempo de caducidad el token
+		.refreshTokenValiditySeconds(3600);
 	}
 
-	// Se configura el endpoint del AuthorizationServer se encarga del proceso de autenticacion
+	// 1) Se configura el endpoint del AuthorizationServer se encarga del proceso de autenticacion
 	// y de validar el token , cada vez que iniciamos sesion enviamos nuestro usuario y contraseña
 	// y si todo sale bien realiza la autenticacion , genera el token se lo entrega al usurio
 	// y despues el usuario con ese token puede acceder a las distintas paginas  y recursos de nuestra
