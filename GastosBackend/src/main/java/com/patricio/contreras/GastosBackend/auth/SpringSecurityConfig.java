@@ -3,6 +3,7 @@ package com.patricio.contreras.GastosBackend.auth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	// al inyectar la interface va abuscar una implementacion concreta que sea de tipo
-	//  UserDetailsService y como hay una sola inyecta UsuarioService
+	//  UserDetailsService y como hay una sola inyecta UsuarioService ,
+	// se inyecta mediante genericos
 	@Autowired
 	private UserDetailsService usuarioService;
 	
@@ -28,6 +30,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	// lo siguiente es registrar en el autentication manager este servicio para 
 	// autenticarpara eso sobreescribimos un metodo
    // Va con @Autowired porque se va inyectar por parametro AuthenticationManagerBuilder auth
+ //el metodo configure no es necesario
 
 	@Override
 	@Autowired
@@ -36,6 +39,14 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		//tambien se va a rncriptar la contraseña
 		auth.userDetailsService(this.usuarioService).passwordEncoder(passwordEncoder());
 	}
+
+	@Bean("authenticationManager")
+	@Override
+	protected AuthenticationManager authenticationManager() throws Exception {
+		return super.authenticationManager();
+	}
+	
+	
 	
 	
 
