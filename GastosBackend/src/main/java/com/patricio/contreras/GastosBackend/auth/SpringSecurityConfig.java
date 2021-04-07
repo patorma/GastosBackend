@@ -5,7 +5,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -46,7 +48,22 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		return super.authenticationManager();
 	}
 	
-	
+	// Estos son reglas para endpoints por el lado de Spring
+	//Por spring hay que deshabilitar CSRF: Cross-site request forgery o falsificacion de peticion
+	//en sitios cruzados es para evitar cualquier ataque Cross-site request forgery es para proteger
+	// nuestro formulario a traves de un token como en nuestro caso se trabaja separado el frontend con 
+	// angular no es necesario tenerlo habilitado esta proteccion de formulario  en spring en el servidor
+	// con .and() se vuelve a la configuracion de HttpSecurity
+	// con esto deshabilitamos los estados de las sessiones ya que se trabajara con token
+	@Override
+	public void configure(HttpSecurity http) throws Exception {
+		
+		http.authorizeRequests()
+		.anyRequest().authenticated()
+		.and()
+		.csrf().disable()
+		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+	}
 	
 	
 

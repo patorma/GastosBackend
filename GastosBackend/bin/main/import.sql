@@ -14,3 +14,15 @@ INSERT INTO notas (titulo,descripcion,estado,fecha_creacion) VALUES('Viaje a San
 INSERT INTO notas (titulo,descripcion,estado,fecha_creacion) VALUES('Prestamo','le preste a mauricio $5000 pesos','PENDIENTE','2021-01-31');
 INSERT INTO notas (titulo,descripcion,estado,fecha_creacion) VALUES('Reunion','Debo reunir con leslie para comprar miel','PENDIENTE','2021-02-05');
 INSERT INTO notas (titulo,descripcion,estado,fecha_creacion) VALUES('Viaje a Concepcion','Se viajo a Concepcion','PENDIENTE','2020-12-31');
+
+
+/* Creamos algunos usuarioscon sus roles */
+INSERT INTO usuarios (username, password ,enabled) VALUES ('patricio','$2a$10$gcOuVoP7r3F/Z8vQIIaqz.KEKskcuRPbGa4E7LmsSB2RG0aibxQse',1);
+INSERT INTO usuarios (username, password ,enabled) VALUES ('admin','$2a$10$kjhmhmQ.Fd/pCHBvAzjMc.BLgRCz0cYoT471d/z5arSNIe5Rddbz2',1);
+
+INSERT INTO roles (nombre) VALUES ('ROLE_USER');
+INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
+
+INSERT INTO usuarios_roles (usuario_id,role_id) VALUES (1,1);
+INSERT INTO usuarios_roles (usuario_id,role_id) VALUES (2,2);
+INSERT INTO usuarios_roles (usuario_id,role_id) VALUES (2,1);
