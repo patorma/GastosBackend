@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 	
+	// Este es el servidor de autorizacion
 	// aca inyectamos el bean de la clase SpringSecurityConfig llamado
 	// passwordEncoder()
 	
@@ -98,17 +99,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	// se anota con @Bean para indicar que se va a crear un componente de spring
 	//se importa la implementacion de jwt
 	// decodifica y codifica datos del token
+	//RSA_PRIVADA 	vamos aa asignar una llave de verificacion
+	// el que firma es la clave privada
+	//RSA_PUBLICA Y el que valida o verifica es la publica
 	@Bean
 	public JwtAccessTokenConverter accesTokenConverter() {
-		// luego se genera un objeto
+		
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();   
-		//vamos aa asignar una llave de verificacion
-		jwtAccessTokenConverter.setSigningKey(JwtConfig.LLAVE_SECRETA);
-		return jwtAccessTokenConverter;
+		jwtAccessTokenConverter.setSigningKey(JwtConfig.RSA_PRIVADA);
+		jwtAccessTokenConverter.setVerifierKey(JwtConfig.RSA_PUBLICA);
+		  return jwtAccessTokenConverter;
 	}
 	
 
-	
 	
 	
 
