@@ -1,5 +1,7 @@
 package com.patricio.contreras.GastosBackend.auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +13,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -31,6 +34,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private InfoAdicionalToken infoAdicionalToken;
 	
 	// Se implementaran tres metodos de configuracion
 
@@ -85,9 +91,15 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		
+		// hay que enlazar la informacion que viene por defecto en el token con la adicional
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList( infoAdicionalToken,accesTokenConverter()));
+		
 		endpoints.authenticationManager(authenticationManager)
 		.tokenStore(tokenStore())// se pasa una instacia del componente que se encarga de almacenar los datos
-		.accessTokenConverter(accesTokenConverter());
+		.accessTokenConverter(accesTokenConverter())
+		.tokenEnhancer(tokenEnhancerChain);
+		
 	}
 
 	@Bean
