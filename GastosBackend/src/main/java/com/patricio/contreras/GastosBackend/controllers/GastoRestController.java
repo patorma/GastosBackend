@@ -42,7 +42,7 @@ public class GastoRestController {
 	@GetMapping("/gastos")
 	public List<Gasto> index(){
 		return gastoService.findAll();
-		
+		 
 	}
 	
 	@GetMapping("/gastos/page/{page}")
