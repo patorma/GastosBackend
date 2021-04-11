@@ -17,8 +17,8 @@ INSERT INTO notas (titulo,descripcion,estado,fecha_creacion) VALUES('Viaje a Con
 
 
 /* Creamos algunos usuarioscon sus roles */
-INSERT INTO usuarios (username, password ,enabled) VALUES ('patricio','$2a$10$gcOuVoP7r3F/Z8vQIIaqz.KEKskcuRPbGa4E7LmsSB2RG0aibxQse',1);
-INSERT INTO usuarios (username, password ,enabled) VALUES ('admin','$2a$10$kjhmhmQ.Fd/pCHBvAzjMc.BLgRCz0cYoT471d/z5arSNIe5Rddbz2',1);
+INSERT INTO usuarios (username, password ,enabled,nombre,apellido,email) VALUES ('patricio','$2a$10$gcOuVoP7r3F/Z8vQIIaqz.KEKskcuRPbGa4E7LmsSB2RG0aibxQse',1,'Patricio','Contreras','patorma@yahoo.com');
+INSERT INTO usuarios (username, password ,enabled,nombre,apellido,email) VALUES ('admin','$2a$10$kjhmhmQ.Fd/pCHBvAzjMc.BLgRCz0cYoT471d/z5arSNIe5Rddbz2',1,'John','Doe','john.doe@gmail.com');
 
 INSERT INTO roles (nombre) VALUES ('ROLE_USER');
 INSERT INTO roles (nombre) VALUES ('ROLE_ADMIN');
