@@ -22,10 +22,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests().antMatchers(HttpMethod.GET,"/api/gastos","/api/gastos/page/**","/api/notas","/api/notas/page/**").permitAll()
-		.antMatchers(HttpMethod.GET,"/api/gastos/{id}","/api/notas/{id}").hasAnyRole("USER","ADMIN")
-		.antMatchers(HttpMethod.GET,"/api/gastos/filtrarValor/**/**").hasAnyRole("USER","ADMIN")
-		.antMatchers(HttpMethod.POST,"/api/gastos","/api/notas").hasRole("ADMIN")
-		.antMatchers("/api/gastos/**","/api/notas/**").hasRole("ADMIN")
+	//	.antMatchers(HttpMethod.GET,"/api/gastos/{id}","/api/notas/{id}").hasAnyRole("USER","ADMIN")
+	//	.antMatchers(HttpMethod.GET,"/api/gastos/filtrarValor/**/**").hasAnyRole("USER","ADMIN")
+	//	.antMatchers(HttpMethod.POST,"/api/gastos","/api/notas").hasRole("ADMIN")
+	//	.antMatchers("/api/gastos/**","/api/notas/**").hasRole("ADMIN") 
 		.anyRequest().authenticated();
 	}
 	

@@ -24,6 +24,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.validation.BindingResult;
 
 
@@ -51,6 +52,7 @@ public class GastoRestController {
 		return gastoService.findAll(pageable);
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/{id}")
 	public ResponseEntity<?> show(@PathVariable Long id){
 		
@@ -71,6 +73,7 @@ public class GastoRestController {
 		return new ResponseEntity<Gasto>(gasto,HttpStatus.OK);
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/gastos")
 	public ResponseEntity<?> create(@Valid @RequestBody Gasto gasto,BindingResult result){
 		// es el nuevo gasto creado
@@ -108,6 +111,7 @@ public class GastoRestController {
 		
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@PutMapping("/gastos/{id}")
 	public ResponseEntity<?> update(@Valid @RequestBody Gasto gasto,BindingResult result,@PathVariable Long id){
 		
@@ -165,6 +169,7 @@ public class GastoRestController {
 		return new ResponseEntity<Map<String, Object>>(response,HttpStatus.CREATED) ;
 	}
 	
+	@Secured("ROLE_ADMIN")
 	@DeleteMapping("/gastos/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id){
 		//Map para guardar el contenido que enviaremos en el ResponseEntity con mensajes
@@ -187,17 +192,19 @@ public class GastoRestController {
 	public List<Tipos> listarTipos(){
 		return gastoService.findAllTipos();
 	}*/
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/valor")
 	public int valorTotal() {
 		return gastoService.valor2();
 	}
 	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/cantidad")
 	public int CantidadGasto() {
 		return gastoService.cantidad();
 	}
 	
-	
+	@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/filtrarValor/{a}/{b}")
 	public ResponseEntity<?> valorByFecha(@PathVariable int a , @PathVariable int b) {
 		int g = 0;
