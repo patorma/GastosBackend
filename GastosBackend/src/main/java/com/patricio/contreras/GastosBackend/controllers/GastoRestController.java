@@ -192,13 +192,13 @@ public class GastoRestController {
 	public List<Tipos> listarTipos(){
 		return gastoService.findAllTipos();
 	}*/
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	//@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/valor")
 	public int valorTotal() {
 		return gastoService.valor2();
 	}
 	
-	@Secured({"ROLE_ADMIN","ROLE_USER"})
+	//@Secured({"ROLE_ADMIN","ROLE_USER"})
 	@GetMapping("/gastos/cantidad")
 	public int CantidadGasto() {
 		return gastoService.cantidad();
