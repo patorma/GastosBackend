@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.patricio.contreras.GastosBackend.models.dao.IGastoDao;
 
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
-import com.patricio.contreras.GastosBackend.models.entity.Tipos;
+import com.patricio.contreras.GastosBackend.models.entity.Local;
+import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
+
 
 
 @Service
@@ -75,6 +77,18 @@ public class GastoServiceImpl implements IGastoService {
 	public int showTotalGastoByFecha(int mes, int año) {
 		
 		return gastoDao.showTotalGastoByFecha(mes, año);
+	}
+
+	@Override
+	public List<TipoGasto> findAllTipos() {
+		
+		return gastoDao.findAllTipos();
+	}
+
+	@Override
+	public List<Local> findAllLocales() {
+		
+		return gastoDao.findAllLocales();
 	}
 
 	

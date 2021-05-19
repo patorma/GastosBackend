@@ -29,6 +29,8 @@ import org.springframework.validation.BindingResult;
 
 
 import com.patricio.contreras.GastosBackend.models.entity.Gasto;
+import com.patricio.contreras.GastosBackend.models.entity.Local;
+import com.patricio.contreras.GastosBackend.models.entity.TipoGasto;
 import com.patricio.contreras.GastosBackend.models.entity.Tipos;
 import com.patricio.contreras.GastosBackend.models.services.IGastoService;
 
@@ -220,6 +222,19 @@ public class GastoRestController {
 	    
 	     return new ResponseEntity<Integer>(g,HttpStatus.OK);
 			
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/gastos/tipos")
+	public List<TipoGasto> listarTipo(){
+		return gastoService.findAllTipos();
+		
+	}
+	
+	@Secured("ROLE_ADMIN")
+	@GetMapping("/gastos/locales")
+	public List<Local> listarLocales(){
+		return gastoService.findAllLocales();
 	}
 	
 	

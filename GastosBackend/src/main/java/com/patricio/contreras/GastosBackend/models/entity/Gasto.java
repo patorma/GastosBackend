@@ -7,11 +7,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,9 +48,9 @@ public class Gasto implements Serializable {
 	@Column(nullable = false)  
 	private int valor;
 	
-	@Column(nullable = false)
+	/*@Column(nullable = false)
 	@Enumerated(value = EnumType.STRING)
-	private Tipos tipo;
+	private Tipos tipo;*/
 	
 	@Column(nullable = false)
 	@NotEmpty  
@@ -73,6 +74,17 @@ public class Gasto implements Serializable {
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 	
+	@NotNull(message = "El tipo no puede ser vacio")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="tipo_gasto_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
+	private TipoGasto tipo;
+	
+	@NotNull(message = "El local no puede ser vacio")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="local_id")
+	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
+	private Local local;
 	
 	
 	/**
