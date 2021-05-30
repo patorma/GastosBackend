@@ -29,7 +29,7 @@ public interface IGastoDao extends JpaRepository<Gasto, Long>{
 	@Query(value="SELECT SUM(g.valor) FROM Gastos g WHERE MONTH(g.fecha_gasto) = ?1 AND YEAR(g.fecha_gasto) = ?2",nativeQuery = true)
 	public int showTotalGastoByFecha(int mes,int año);
 	
-	@Query("from TpoGasto")
+	@Query("from TipoGasto")
 	public List<TipoGasto> findAllTipos();
 	
 	@Query("from Local")

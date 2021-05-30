@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -50,9 +52,45 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	@Transactional(readOnly = true)
+	public List<Usuario> findAll() {
+	
+		return usuarioDao.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
 	public Usuario findByUsername(String username) {
 		
 		return  usuarioDao.findByUsername(username);
 	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Page<Usuario> findAll(Pageable pageable) {
+	
+		return usuarioDao.findAll(pageable);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public Usuario findById(Long id) {
+		
+		return usuarioDao.findById(id).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public Usuario save(Usuario usuario) {
+		
+		return usuarioDao.save(usuario);
+	}
+
+	@Override
+	@Transactional
+	public void delete(Long id) {
+		usuarioDao.deleteById(id);
+		
+	}
+
 
 }

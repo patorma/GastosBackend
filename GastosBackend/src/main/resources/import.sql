@@ -1,12 +1,37 @@
+/*Registro de locales*/
+INSERT INTO locales (nombre_local,ciudad) VALUES('Fruteria Talca','Laja');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Supermercado Unico','Laja');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Unimarc','Laja');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Santa Isabel','Los Angeles');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Supermercado Lider','Los Angeles');
+INSERT INTO locales (nombre_local,ciudad) VALUES('PC Factory','Concepcion');
+INSERT INTO locales (nombre_local,ciudad) VALUES('ABCDIN','Concepcion');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Sucursal de Frontel','Laja');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Almacenes Paris','Santiago');
+INSERT INTO locales (nombre_local,ciudad) VALUES('Super 10','Concepcion');
+INSERT INTO locales (nombre_local,ciudad) VALUES('camioneta','Laja');
+INSERT INTO locales (nombre_local,ciudad) VALUES('cruz verde','Laja');
+
+/*Registro de tipos*/
+INSERT INTO tipos_gastos (tipo) VALUES('agua');
+INSERT INTO tipos_gastos (tipo) VALUES('luz');
+INSERT INTO tipos_gastos (tipo) VALUES('ferreteria');
+INSERT INTO tipos_gastos (tipo) VALUES('supermercado');
+INSERT INTO tipos_gastos (tipo) VALUES('gas');
+INSERT INTO tipos_gastos (tipo) VALUES('vestimenta');
+INSERT INTO tipos_gastos (tipo) VALUES('tecnologia');
+INSERT INTO tipos_gastos (tipo) VALUES('leña');
+INSERT INTO tipos_gastos (tipo) VALUES('farmacia');
+
 /*Registro de gastos*/
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('Luz',17000,'GASTO_COMUN','Se fue a pagar la boleta de luz de frontel','2021-01-13');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES ('Agua',7000,'GASTO_COMUN','Se fue a pagar la boleta del agua','2021-01-10');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES ('Supermercado',25000,'OTROS','Se compro carne, botella de limon, sarten y bolsas de yogurt','2021-01-25');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('compra notebook',450000,'OTROS','Pato fue a Santiago a comprar el notebook el dia lunes 22 de marzo','2021-03-22');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('Viaje en tren a concepción',14000,'OTROS','Se fue a concepcion el lunes a comprar carne y abarrotes y cotizar precios de productos en negocio','2021-03-15');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('Boleta de luz de marzon',15100,'GASTO_COMUN','se pago en la sede de frontel de laja la boleta del mes de marzo','2021-03-08');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('Compra de leña',45000,'OTROS','se compro tres metros de leña de pino para tener para el invierno ','2021-03-16');
-INSERT INTO gastos (nombre,valor,tipo,descripcion,fecha_gasto) VALUES('Compra crema pato',12900,'OTROS','se compro en cruz verde crema para dermatitis del patricio','2021-03-15');
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('Boleta de la lus de enero del 2021',17000,'Se fue a pagar la boleta de luz de frontel','2021-01-13',2,8);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES ('Pago boleta del agua',7000,'Se fue a pagar la boleta del agua','2021-01-10',1,2);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES ('Compras en el supermercado ',25000,'Se compro carne, botella de limon, sarten y bolsas de yogurt','2021-01-25',4,3);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('compra notebook',450000,'Pato fue a Santiago a comprar el notebook el dia lunes 22 de marzo','2021-03-22',7,9);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('Viaje en tren a concepción',14000,'Se fue a concepcion el lunes a comprar carne y abarrotes y cotizar precios de productos en negocio','2021-03-15',4,10);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('Boleta de luz de marzo',15100,'se pago en la sede de frontel de laja la boleta del mes de marzo','2021-03-08',2,8);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('Compra de leña',45000,'se compro tres metros de leña de pino para tener para el invierno ','2021-03-16',8,11);
+INSERT INTO gastos (nombre,valor,descripcion,fecha_gasto,tipo_gasto_id,local_id) VALUES('Compra crema pato',12900,'se compro en cruz verde crema para dermatitis del patricio','2021-03-15',9,12);
 
 
 /*Registro de notas*/
