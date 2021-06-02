@@ -32,7 +32,7 @@ public class Local implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "nombre_local")
+	@Column(name = "nombre_local",unique=true)
 	@Size(min=6, max=60)
 	private String nombreLocal;
 	
