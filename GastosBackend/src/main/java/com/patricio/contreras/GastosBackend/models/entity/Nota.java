@@ -25,7 +25,6 @@ import lombok.NonNull;
 
 @Entity
 @Table(name = "notas")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @NonNull
@@ -62,6 +61,118 @@ public class Nota implements Serializable{
 	
 	
 	
+	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+
+
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+
+
+
+
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+
+
+
+
+
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+
+
+
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+
+
+
+
+
+
+	public Estados getEstado() {
+		return estado;
+	}
+
+
+
+
+
+
+
+
+	public void setEstado(Estados estado) {
+		this.estado = estado;
+	}
+
+
+
+
+
+
+
+
+	public LocalDate getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+
+
+
+
+
+
+
+	public void setFechaCreacion(LocalDate fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+
+
+
+
+
+
+
 	/**
 	 * 
 	 */

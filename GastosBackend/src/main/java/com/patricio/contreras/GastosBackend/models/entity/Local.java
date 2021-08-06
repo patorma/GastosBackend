@@ -21,7 +21,6 @@ import lombok.NonNull;
 
 @Entity
 @Table(name = "locales")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @NonNull
@@ -40,6 +39,37 @@ public class Local implements Serializable {
 	@Size(min=4, max=45)
 	private String ciudad;
 	
+	
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public String getNombreLocal() {
+		return nombreLocal;
+	}
+
+
+	public void setNombreLocal(String nombreLocal) {
+		this.nombreLocal = nombreLocal;
+	}
+
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+
 	/*@OneToMany(mappedBy = "local")
 	@JsonIgnoreProperties({"hibernateLazyInitializer","hadler"})
 	private List<Gasto> gastos;*/
